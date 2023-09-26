@@ -68,7 +68,7 @@ public class SetupTeardownLauncherSessionListener implements LauncherSessionList
 		}
 
 		void setUp() {			
-//			containers.forEach((version, container) -> container.start());
+			containers.forEach((version, container) -> container.start());
 		}
 
 		void tearDown() {
