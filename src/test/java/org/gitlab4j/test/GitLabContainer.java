@@ -18,8 +18,8 @@ public class GitLabContainer extends GenericContainer<GitLabContainer> {
 		this.version = version;
 		this.parsedVersion = new Version(version);
 		
-		this.withExposedPorts(80)
-			.withEnv("GITLAB_OMNIBUS_CONFIG", "gitlab_rails['initial_root_password']=\"password\";gitlab_rails['lfs_enabled']=false;")
+		this.withExposedPorts(8090)
+			.withEnv("GITLAB_OMNIBUS_CONFIG", "gitlab_rails['initial_root_password']=\"Pass_w0rd\";gitlab_rails['lfs_enabled']=false;")
 			.waitingFor(
 				Wait
 				.forHttp("/")
@@ -30,7 +30,7 @@ public class GitLabContainer extends GenericContainer<GitLabContainer> {
 	}
 	
 	public String url() {
-		return "http://localhost:" + getMappedPort(80) + "";
+		return "http://localhost:" + getMappedPort(8090) + "";
 	}
 
 	@Override
