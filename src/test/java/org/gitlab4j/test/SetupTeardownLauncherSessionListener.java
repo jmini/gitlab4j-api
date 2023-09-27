@@ -46,7 +46,7 @@ public class SetupTeardownLauncherSessionListener implements LauncherSessionList
 
 		private static final String[] GITLAB_VERSIONS = { 
 				"15.4.2-ce.0",
-				"14.10.5-ce.0", 
+				//"14.10.5-ce.0", 
 		};
 
 		private static final Map<String, GitLabContainer> containers = new HashMap<>();
