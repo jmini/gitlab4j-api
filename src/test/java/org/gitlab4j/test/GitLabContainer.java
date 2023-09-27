@@ -19,7 +19,7 @@ public class GitLabContainer extends GenericContainer<GitLabContainer> {
 		this.parsedVersion = new Version(version);
 		
 		this.withExposedPorts(8090)
-			.withEnv("GITLAB_OMNIBUS_CONFIG", "gitlab_rails['initial_root_password']=\"Pass_w0rd\";gitlab_rails['lfs_enabled']=false;")
+			.withEnv("GITLAB_OMNIBUS_CONFIG", "gitlab_rails['initial_root_password']=\"Pass_w0rd\";gitlab_rails['lfs_enabled']=false;external_url 'http://localhost:8090';gitlab_rails['gitlab_shell_ssh_port'] = 9022")
 			.waitingFor(
 				Wait
 				.forHttp("/")
