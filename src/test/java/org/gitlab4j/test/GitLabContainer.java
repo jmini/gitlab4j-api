@@ -1,18 +1,18 @@
 package org.gitlab4j.test;
 
+import java.io.IOException;
 import java.time.Duration;
 
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
-import org.testcontainers.containers.wait.strategy.WaitStrategy;
 import org.testcontainers.utility.DockerImageName;
 
 public class GitLabContainer extends GenericContainer<GitLabContainer> {
 
-	
 	public final String version;
 	public final Version parsedVersion;
-	
+	public String rootUserToken;
+
 	public GitLabContainer(String version) {
 		super(DockerImageName.parse("gitlab/gitlab-ce:" + version));
 		this.version = version;
@@ -28,7 +28,21 @@ public class GitLabContainer extends GenericContainer<GitLabContainer> {
 				.withStartupTimeout(Duration.ofSeconds(300))
 		);
 	}
-	
+
+	public void initRootUserToken() {
+		String now = "" + System.currentTimeMillis();
+		String token = "tk-" + now;
+		try {
+			ExecResult result = this.execInContainer("gitlab-rails", "runner", "\"token = User.find_by_username('root').personal_access_tokens.create(scopes: ['api'], name: 'GitLab4J Token " + now + "', expires_at: 5.days.from_now); token.set_token('"+ token + "'); token.save!\"");
+			if(result.getExitCode() != 0) {
+				throw new IllegalStateException("Could not create personal token for the root user\n\nStd out logs:\n" + result.getStdout() + "\n\nStd err logs:\n" + result.getStderr());
+			}
+		} catch (UnsupportedOperationException | IOException | InterruptedException e) {
+			throw new IllegalStateException("Could not create personal token for the root user", e);
+		}
+		this.rootUserToken = token;
+	}
+
 	public String url() {
 		return "http://localhost:" + getMappedPort(8090) + "";
 	}
@@ -37,6 +51,4 @@ public class GitLabContainer extends GenericContainer<GitLabContainer> {
 	public String toString() {
 		return "GitLabContainer [version=" + version + ", parsedVersion=" + parsedVersion + ", url()= " + url() + " ]";
 	}
-	
-	
 }

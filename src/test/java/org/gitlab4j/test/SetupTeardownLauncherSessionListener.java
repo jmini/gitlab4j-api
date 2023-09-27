@@ -67,8 +67,11 @@ public class SetupTeardownLauncherSessionListener implements LauncherSessionList
 			return Collections.unmodifiableCollection(containers.values());
 		}
 
-		void setUp() {			
-			containers.forEach((version, container) -> container.start());
+		void setUp() {
+			containers.forEach((version, container) -> {
+				container.start();
+				container.initRootUserToken();
+			});
 		}
 
 		void tearDown() {
