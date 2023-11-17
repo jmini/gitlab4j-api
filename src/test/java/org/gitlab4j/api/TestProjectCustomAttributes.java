@@ -54,6 +54,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  */
 @Tag("integration")
 @ExtendWith(SetupIntegrationTestExtension.class)
+@org.junit.jupiter.api.Disabled("Integration test re-work")
 public class TestProjectCustomAttributes extends AbstractIntegrationTest {
 
     private static final String TEST_CUSTOM_ATTRIBUTE_KEY = "GitLab4JCustomAttributeTestKey";

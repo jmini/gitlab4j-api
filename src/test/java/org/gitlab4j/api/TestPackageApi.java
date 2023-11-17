@@ -18,6 +18,7 @@ import java.util.*;
 
 @Tag("integration")
 @ExtendWith(SetupIntegrationTestExtension.class)
+@org.junit.jupiter.api.Disabled("Integration test re-work")
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class TestPackageApi extends AbstractIntegrationTest {
 

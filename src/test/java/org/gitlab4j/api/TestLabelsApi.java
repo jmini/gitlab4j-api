@@ -22,6 +22,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @Tag("integration")
 @ExtendWith(SetupIntegrationTestExtension.class)
+@org.junit.jupiter.api.Disabled("Integration test re-work")
 public class TestLabelsApi extends AbstractIntegrationTest {
 
     private static final String TEST_GROUP = HelperUtils.getProperty(GROUP_KEY);

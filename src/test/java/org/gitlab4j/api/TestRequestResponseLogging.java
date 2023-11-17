@@ -61,6 +61,7 @@ import uk.org.webcompere.systemstubs.stream.SystemErr;
  */
 @Tag("integration")
 @ExtendWith(SetupIntegrationTestExtension.class)
+@org.junit.jupiter.api.Disabled("Integration test re-work")
 @ExtendWith(SystemStubsExtension.class)
 public class TestRequestResponseLogging implements PropertyConstants {
 

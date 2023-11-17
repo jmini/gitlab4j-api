@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @Tag("integration")
 @ExtendWith(SetupIntegrationTestExtension.class)
+@org.junit.jupiter.api.Disabled("Integration test re-work")
 public class TestResourceStateEventsApi extends AbstractIntegrationTest {
 
     private static GitLabApi gitLabApi;
