@@ -12,13 +12,6 @@ jobs:
   build-jdk8:
     name: "Build JDK 8"
     runs-on: ubuntu-latest
-    services:
-      gitlab-instance:
-        image: gitlab/gitlab-ce:12.9.2-ce.0
-        env:
-          GITLAB_OMNIBUS_CONFIG: gitlab_rails['initial_root_password']="password";gitlab_rails['lfs_enabled']=false;
-        ports:
-          - 8090:80
     steps:
       - uses: actions/checkout@v2
         with:
@@ -28,19 +21,7 @@ jobs:
         with:
           distribution: adopt-hotspot
           java-version: 8
-      - name: Get Date
-        id: get-date
-        run: |
-          echo "date=$(/bin/date -u "+%Y-%m")" >> $GITHUB_OUTPUT
-        shell: bash
-      - name: Cache Maven Repository
-        id: cache-maven
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2/repository
-          # refresh cache every month to avoid unlimited growth
-          key: gitlab4jmaven-${{ steps.get-date.outputs.date }}
       - name: GitLab4j verify
         id: gitlab4j-verify
         run: |
-          ./mvnw verify -B -V
+          ./gradlew build --console=PLAIN --stacktrace
