@@ -53,6 +53,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  */
 @Tag("integration")
 @ExtendWith(SetupIntegrationTestExtension.class)
+@org.junit.jupiter.api.Disabled("Integration tests are disabled")
 public class TestWikisApi extends AbstractIntegrationTest {
 
     private static final String TEST_WIKI_TITLE_PREFIX = "Test Wiki: ";

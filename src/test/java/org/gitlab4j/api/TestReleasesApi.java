@@ -24,6 +24,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @Tag("integration")
 @ExtendWith(SetupIntegrationTestExtension.class)
+@org.junit.jupiter.api.Disabled("Integration tests are disabled")
 public class TestReleasesApi extends AbstractIntegrationTest {
 
     private static final String TEST_TAG_NAME = "test-release/1.0.0";

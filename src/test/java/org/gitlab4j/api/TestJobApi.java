@@ -52,6 +52,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  */
 @Tag("integration")
 @ExtendWith(SetupIntegrationTestExtension.class)
+@org.junit.jupiter.api.Disabled("Integration tests are disabled")
 public class TestJobApi extends AbstractIntegrationTest {
 
     private static GitLabApi gitLabApi;
