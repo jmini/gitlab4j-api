@@ -33,7 +33,7 @@ public class GitLabContainer extends GenericContainer<GitLabContainer> {
 		String now = "" + System.currentTimeMillis();
 		String token = "tk-" + now;
 		try {
-			ExecResult result = this.execInContainer("gitlab-rails", "runner", "\"token = User.find_by_username('root').personal_access_tokens.create(scopes: ['api'], name: 'GitLab4J Token " + now + "', expires_at: 5.days.from_now); token.set_token('"+ token + "'); token.save!\"");
+			ExecResult result = this.execInContainer("bash", "-c", "gitlab-rails runner \"token = User.find_by_username('root').personal_access_tokens.create(scopes: ['api'], name: 'Test token', expires_at: 365.days.from_now); token.set_token('"+ token + "'); token.save!\"");
 			if(result.getExitCode() != 0) {
 				throw new IllegalStateException("Could not create personal token for the root user\n\nStd out logs:\n" + result.getStdout() + "\n\nStd err logs:\n" + result.getStderr());
 			}
