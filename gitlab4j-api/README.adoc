@@ -1,0 +1,47 @@
+== Integration tests
+
+=== Mock server
+
+By default the integration tests are running resquests against a mock server started on port 9999 (using the https://github.com/xdev-software/mockserver-neolight[fork] of the https://www.mock-server.com/[mock-server] project)
+
+You can force usage of the mock server with by setting following environement variable when running the tests:
+
+```
+export MOCKSERVER_FORWARD_TO_REAL_SERVER=false
+```
+
+Usually tests are exucuted using gradle, check the corresponding section in the `tasks.named('test')` section of the `build.gradle` file.
+
+The mock-server expectation are stored in following folder: `gitlab4j-api/src/test/resources/mock-server/`.
+
+Writing those expection files can be quite repetive work and hard to maintain.
+This is why it is recommended to capture REST requests and responses from a real GitLab server (see next section)
+
+=== Real local GitLab server 
+
+```
+export MOCKSERVER_FORWARD_TO_REAL_SERVER=true
+export 
+```
+
+
+The real GitLab server is execpted to run on a local port 8888.
+
+If the server is running on a distant server (often using `https`) a reverse proxy tool like https://www.mitmproxy.org/[`mitmproxy`] can be used to forward the requests:
+
+```
+mitmproxy -p 8888 --mode reverse:https://gitlab.com/
+```
+
+Or with a Web-UI:
+
+```
+mitmweb -p 8888 --mode reverse:https://gitlab.com/
+```
+
+=== Configuration setup
+
+Forwarding requests to a real local GitLab server is controled by 
+
+
+In addition because credentials and specific ids. 
